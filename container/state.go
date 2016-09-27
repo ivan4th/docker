@@ -2,7 +2,7 @@ package container
 
 import (
 	"fmt"
-	"sync"
+	// "sync"
 	"time"
 
 	"golang.org/x/net/context"
@@ -14,7 +14,7 @@ import (
 // set the state. Container has an embed, which allows all of the
 // functions defined against State to run against Container.
 type State struct {
-	sync.Mutex
+	MutexTrap
 	// FIXME: Why do we have both paused and running if a
 	// container cannot be paused and running at the same time?
 	Running           bool
