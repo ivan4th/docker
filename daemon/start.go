@@ -6,6 +6,7 @@ import (
 	"runtime"
 	"strings"
 	"syscall"
+	"time"
 
 	"google.golang.org/grpc"
 
@@ -91,6 +92,11 @@ func (daemon *Daemon) Start(container *container.Container) error {
 // begin running.
 func (daemon *Daemon) containerStart(container *container.Container) (err error) {
 	container.Lock()
+	logrus.Debugf("QQQQQQQQQQQQQ containerStart: container.Name='%s'", container.Name)
+	if container.Name == "/verybad" {
+		// XXX trip the MutexTrap on this container
+		time.Sleep(20 * time.Second)
+	}
 	defer container.Unlock()
 
 	if container.Running {
